@@ -1,3 +1,4 @@
+// java scripts features in there 
 let display = document.getElementById("display");
 
 // Append numbers
