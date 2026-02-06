@@ -1,46 +1,56 @@
-// java scripts features in there 
-let display = document.getElementById("display");
-
-// Append numbers
-function appendNumber(number) {
-  display.value += number;
+//code it now so prepare
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-// Append operators
-function appendOperator(operator) {
-  display.value += operator;
+body {
+  background: #f4f6f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-// Clear all
-function clearDisplay() {
-  display.value = "";
+.calculator {
+  background: white;
+  padding: 20px;
+  width: 340px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-// Delete last character
-function deleteLast() {
-  display.value = display.value.slice(0, -1);
+#display {
+  width: 100%;
+  height: 50px;
+  font-size: 22px;
+  text-align: right;
+  margin-bottom: 10px;
+  padding: 6px;
 }
 
-// Calculate result
-function calculate() {
-  try {
-    display.value = Function("return " + display.value)();
-  } catch {
-    display.value = "Error";
-  }
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
-// Square
-function square() {
-  display.value = Math.pow(display.value, 2);
+button {
+  padding: 14px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-// Square root
-function squareRoot() {
-  display.value = Math.sqrt(display.value);
+.equal {
+  grid-column: span 2;
+  background: #007bff;
+  color: white;
 }
 
-// Percentage
-function calculatePercent() {
-  display.value = display.value / 100;
+.equal:hover {
+  background: #0056b3;
+}
+
+.zero {
+  grid-column: span 2;
 }
