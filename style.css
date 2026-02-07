@@ -35,3 +35,9 @@ button {
   cursor: pointer;
   border-radius: 6px;
 }
+
+.equal {
+  grid-column: span 2;
+  background: #ff9800;
+  color: white;
+}
