@@ -6,3 +6,7 @@ function append(value) {
 function clearAll() {
   display.value = "";
 }
+
+function deleteLast() {
+  display.value = display.value.slice(0, -1);
+}
