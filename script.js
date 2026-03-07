@@ -31,6 +31,19 @@ function append(value) {
     } else if (value === '√(') {
         display.value += 'sqrt(';
         return;
+    } else if (value === '|') {
+        // Handle absolute value
+        display.value += 'abs(';
+        return;
+    } else if (value === '1/') {
+        // Handle reciprocal
+        const currentValue = display.value;
+        if (currentValue && currentValue !== '0') {
+            display.value = `1/(${currentValue})`;
+        } else {
+            display.value = '1/0';
+        }
+        return;
     }
 
     // Replace initial 0 with new value
@@ -103,7 +116,12 @@ function calculate() {
         expression = expression.replace(/√\(/g, 'Math.sqrt(');
         expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
         
-        // Handle trigonometric functions (convert degrees to radians)
+        // Handle absolute value
+        expression = expression.replace(/abs\(/g, 'Math.abs(');
+        
+        // Handle reciprocal (1/x) - already handled by expression structure
+        
+        // Handle trigonometric functions
         expression = expression.replace(/sin\(/g, 'Math.sin(');
         expression = expression.replace(/cos\(/g, 'Math.cos(');
         expression = expression.replace(/tan\(/g, 'Math.tan(');
@@ -111,6 +129,15 @@ function calculate() {
         // Handle logarithmic functions
         expression = expression.replace(/log\(/g, 'Math.log10(');
         expression = expression.replace(/ln\(/g, 'Math.log(');
+        
+        // Check for balanced parentheses
+        const openParens = (expression.match(/\(/g) || []).length;
+        const closeParens = (expression.match(/\)/g) || []).length;
+        
+        // Auto-close missing parentheses
+        if (openParens > closeParens) {
+            expression += ')'.repeat(openParens - closeParens);
+        }
         
         // Evaluate the expression safely
         const result = evaluateExpression(expression);
@@ -203,6 +230,10 @@ function handleKeyboardInput(event) {
     if (key === '%') append('%');
     if (key === '^' || key === '**') append('^');
     
+    // Parentheses keys
+    if (key === '(') append('(');
+    if (key === ')') append(')');
+    
     // Function keys
     if (key === 'Enter' || key === '=') calculate();
     if (key === 'Escape') clearAll();
@@ -215,6 +246,8 @@ function handleKeyboardInput(event) {
     if (event.ctrlKey && key === 'l') append('log(');
     if (event.ctrlKey && key === 'n') append('ln(');
     if (event.ctrlKey && key === 'r') append('√(');
+    if (event.ctrlKey && key === 'a') append('|'); // Ctrl+A for absolute value
+    if (event.ctrlKey && key === 'f') append('1/'); // Ctrl+F for fraction
     
     // Constants
     if (key === 'p' && event.ctrlKey) append('π');
@@ -225,7 +258,8 @@ function handleKeyboardInput(event) {
 function isCalculatorKey(key) {
     const calculatorKeys = [
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.',
-        '+', '-', '*', '/', '%', '^', '=', 'Enter', 'Escape', 'Backspace'
+        '+', '-', '*', '/', '%', '^', '(', ')', '=',
+        'Enter', 'Escape', 'Backspace'
     ];
     return calculatorKeys.includes(key);
 }
