@@ -10,62 +10,66 @@
 
 <body>
   <div class="calculator">
-    <!-- Header with title -->
     <div class="calculator-header">
-      <h1>Calculator</h1>
+      <h2>Scientific Calculator</h2>
+      <span class="mode-indicator">Standard</span>
     </div>
 
-    <!-- Display Section -->
     <div class="display-container">
       <input type="text" id="display" class="display" readonly placeholder="0">
-      <div class="expression-history" id="expression"></div>
+      <div class="display-history" id="history"></div>
     </div>
 
-    <!-- Button Grid -->
-    <div class="button-grid">
-      <!-- Row 1: Scientific Functions -->
+    <div class="button-grid" id="buttonGrid">
+      <!-- Row 1: Scientific functions -->
       <button class="btn scientific" onclick="append('sin(')">sin</button>
       <button class="btn scientific" onclick="append('cos(')">cos</button>
       <button class="btn scientific" onclick="append('tan(')">tan</button>
-      <button class="btn scientific" onclick="append('log(')">log</button>
+      <button class="btn scientific" onclick="append('π')">π</button>
 
-      <!-- Row 2: More Scientific Functions -->
+      <!-- Row 2: Scientific functions -->
+      <button class="btn scientific" onclick="append('log(')">log</button>
       <button class="btn scientific" onclick="append('ln(')">ln</button>
       <button class="btn scientific" onclick="append('√(')">√</button>
+      <button class="btn scientific" onclick="append('e')">e</button>
+
+      <!-- Row 3: Power and new functions -->
       <button class="btn scientific" onclick="append('²')">x²</button>
       <button class="btn scientific" onclick="append('^')">xʸ</button>
+      <button class="btn function" onclick="append('|')">|x|</button>
+      <button class="btn function" onclick="append('1/')">1/x</button>
 
-      <!-- Row 3: Constants and Controls -->
-      <button class="btn constant" onclick="append('π')">π</button>
-      <button class="btn constant" onclick="append('e')">e</button>
+      <!-- Row 4: Parentheses and controls -->
+      <button class="btn function" onclick="append('(')">(</button>
+      <button class="btn function" onclick="append(')')">)</button>
       <button class="btn function" onclick="clearAll()">AC</button>
       <button class="btn function" onclick="deleteLast()">DEL</button>
 
-      <!-- Row 4: Numbers and Operators -->
+      <!-- Row 5: Numbers and operators -->
       <button class="btn number" onclick="append('7')">7</button>
       <button class="btn number" onclick="append('8')">8</button>
       <button class="btn number" onclick="append('9')">9</button>
       <button class="btn operator" onclick="append('/')">÷</button>
 
-      <!-- Row 5 -->
+      <!-- Row 6 -->
       <button class="btn number" onclick="append('4')">4</button>
       <button class="btn number" onclick="append('5')">5</button>
       <button class="btn number" onclick="append('6')">6</button>
       <button class="btn operator" onclick="append('*')">×</button>
 
-      <!-- Row 6 -->
+      <!-- Row 7 -->
       <button class="btn number" onclick="append('1')">1</button>
       <button class="btn number" onclick="append('2')">2</button>
       <button class="btn number" onclick="append('3')">3</button>
       <button class="btn operator" onclick="append('-')">−</button>
 
-      <!-- Row 7 -->
+      <!-- Row 8 -->
       <button class="btn number" onclick="append('0')">0</button>
       <button class="btn number" onclick="append('.')">.</button>
       <button class="btn operator" onclick="append('%')">%</button>
       <button class="btn operator" onclick="append('+')">+</button>
 
-      <!-- Row 8: Equals Button (Full Width) -->
+      <!-- Row 9: Equals button spans 4 columns -->
       <button class="btn equals" onclick="calculate()">=</button>
     </div>
   </div>

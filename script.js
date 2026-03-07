@@ -1,6 +1,10 @@
-// Get DOM elements
+// Get display element
 const display = document.getElementById('display');
-const expressionHistory = document.getElementById('expression');
+const historyDiv = document.getElementById('history');
+let lastResult = null;
+
+// Add keyboard support
+document.addEventListener('keydown', handleKeyboardInput);
 
 // Initialize display
 display.value = '0';
@@ -15,45 +19,52 @@ function append(value) {
     } else if (value === '²') {
         // Handle square
         const currentValue = display.value;
-        if (currentValue !== '0' && currentValue !== '') {
+        if (currentValue && currentValue !== '0') {
             display.value = `(${currentValue})^2`;
         } else {
             display.value = '0^2';
         }
-        updateExpression();
+        return;
+    } else if (value === '^') {
+        display.value += '^';
+        return;
+    } else if (value === '√(') {
+        display.value += 'sqrt(';
         return;
     }
 
-    // Replace initial zero
+    // Replace initial 0 with new value
     if (display.value === '0' && !isOperator(value) && value !== '.') {
         display.value = value;
     } else {
-        // Prevent multiple operators in a row
+        // Check for multiple operators
         const lastChar = display.value.slice(-1);
         if (isOperator(lastChar) && isOperator(value)) {
-            // Replace last operator with new one
+            // Replace last operator
             display.value = display.value.slice(0, -1) + value;
         } else {
             display.value += value;
         }
     }
     
-    updateExpression();
+    // Update history
+    updateHistory();
 }
 
-// Check if character is an operator
+// Function to check if character is operator
 function isOperator(char) {
     return ['+', '-', '*', '/', '%', '^'].includes(char);
 }
 
-// Clear all
+// Function to clear all
 function clearAll() {
     display.value = '0';
-    expressionHistory.textContent = '';
+    historyDiv.textContent = '';
+    lastResult = null;
     display.classList.remove('error');
 }
 
-// Delete last character
+// Function to delete last character
 function deleteLast() {
     if (display.value.length > 1) {
         display.value = display.value.slice(0, -1);
@@ -61,39 +72,28 @@ function deleteLast() {
         display.value = '0';
     }
     display.classList.remove('error');
-    updateExpression();
+    updateHistory();
 }
 
-// Update expression history
-function updateExpression() {
-    if (display.value !== '0' && display.value !== 'Error') {
-        expressionHistory.textContent = display.value;
-    } else {
-        expressionHistory.textContent = '';
-    }
-}
-
-// Calculate result
+// Function to calculate result
 function calculate() {
     try {
         let expression = display.value;
         
-        // Don't calculate empty or error expressions
-        if (!expression || expression === '0' || expression === 'Error') {
-            return;
-        }
-
+        // Don't calculate empty expression
+        if (!expression || expression === '0') return;
+        
         // Store expression in history
-        expressionHistory.textContent = expression + ' =';
+        historyDiv.textContent = expression + ' =';
         
         // Replace mathematical constants
         expression = expression.replace(/π/g, Math.PI.toString());
         expression = expression.replace(/e/g, Math.E.toString());
         
-        // Handle power operator (xʸ)
+        // Handle power operator (^)
         expression = expression.replace(/\^/g, '**');
         
-        // Handle square (x²)
+        // Handle square notation
         expression = expression.replace(/²/g, '**2');
         
         // Handle percentage
@@ -101,8 +101,9 @@ function calculate() {
         
         // Handle square root
         expression = expression.replace(/√\(/g, 'Math.sqrt(');
+        expression = expression.replace(/sqrt\(/g, 'Math.sqrt(');
         
-        // Handle trigonometric functions (input in degrees)
+        // Handle trigonometric functions (convert degrees to radians)
         expression = expression.replace(/sin\(/g, 'Math.sin(');
         expression = expression.replace(/cos\(/g, 'Math.cos(');
         expression = expression.replace(/tan\(/g, 'Math.tan(');
@@ -111,59 +112,41 @@ function calculate() {
         expression = expression.replace(/log\(/g, 'Math.log10(');
         expression = expression.replace(/ln\(/g, 'Math.log(');
         
-        // Validate expression before evaluation
-        if (!isValidExpression(expression)) {
-            throw new Error('Invalid expression');
-        }
-        
-        // Evaluate expression
+        // Evaluate the expression safely
         const result = evaluateExpression(expression);
         
-        // Check for invalid results
-        if (!isFinite(result) || isNaN(result)) {
-            throw new Error('Invalid result');
+        // Check if result is valid
+        if (isNaN(result) || !isFinite(result)) {
+            throw new Error('Invalid calculation');
         }
         
-        // Format and display result
-        display.value = formatResult(result);
+        // Format result
+        const formattedResult = formatResult(result);
+        display.value = formattedResult;
+        lastResult = formattedResult;
         display.classList.remove('error');
         
     } catch (error) {
-        handleError();
+        handleError(error.message);
     }
 }
 
-// Validate expression for safety
-function isValidExpression(expr) {
-    // Check for dangerous patterns
-    const dangerousPatterns = [
-        /Math\.\w+\(\)/g,  // Empty function calls
-        /[^0-9+\-*/()^.\s Math.sqrtloglnten]/g,  // Invalid characters
-    ];
-    
-    for (let pattern of dangerousPatterns) {
-        if (pattern.test(expr)) {
-            return false;
-        }
-    }
-    
-    // Check for balanced parentheses
-    let parentheses = 0;
-    for (let char of expr) {
-        if (char === '(') parentheses++;
-        if (char === ')') parentheses--;
-        if (parentheses < 0) return false;
-    }
-    
-    return parentheses === 0;
-}
-
-// Safe evaluation using Function constructor
+// Safe evaluation function
 function evaluateExpression(expr) {
-    // Convert to a safe expression
-    const safeExpr = expr.replace(/Math\.(\w+)/g, 'Math.$1');
-    const fn = new Function('return ' + safeExpr);
+    // Remove any unsafe characters
+    if (!isSafeExpression(expr)) {
+        throw new Error('Invalid expression');
+    }
+    
+    // Use Function constructor for safe evaluation
+    const fn = new Function('return ' + expr);
     return fn();
+}
+
+// Check if expression is safe
+function isSafeExpression(expr) {
+    const unsafePattern = /[^0-9+\-*/().% Math\s]|Math\.\w+\(\)/g;
+    return !unsafePattern.test(expr.replace(/Math\.\w+/g, ''));
 }
 
 // Format result to avoid long decimals
@@ -171,15 +154,15 @@ function formatResult(result) {
     if (Number.isInteger(result)) {
         return result.toString();
     }
-    // Limit to 8 decimal places for clean display
-    return parseFloat(result.toFixed(8)).toString();
+    // Limit to 10 decimal places
+    return parseFloat(result.toFixed(10)).toString();
 }
 
-// Handle errors
-function handleError() {
+// Handle calculation errors
+function handleError(message) {
     display.value = 'Error';
     display.classList.add('error');
-    expressionHistory.textContent = 'Invalid expression';
+    historyDiv.textContent = 'Invalid expression';
     
     // Clear error after 2 seconds
     setTimeout(() => {
@@ -189,37 +172,54 @@ function handleError() {
     }, 2000);
 }
 
-// Keyboard support (optional enhancement)
-document.addEventListener('keydown', (e) => {
-    const key = e.key;
+// Update history display
+function updateHistory() {
+    if (display.value !== '0' && display.value !== 'Error') {
+        historyDiv.textContent = display.value;
+    } else {
+        historyDiv.textContent = '';
+    }
+}
+
+// Handle keyboard input
+function handleKeyboardInput(event) {
+    const key = event.key;
     
-    // Prevent default for calculator keys
+    // Prevent default behavior for calculator keys
     if (isCalculatorKey(key)) {
-        e.preventDefault();
+        event.preventDefault();
     }
     
-    // Numbers
+    // Number keys
     if (/[0-9.]/.test(key)) {
         append(key);
     }
     
-    // Operators
+    // Operator keys
     if (key === '+') append('+');
     if (key === '-') append('-');
     if (key === '*') append('*');
     if (key === '/') append('/');
     if (key === '%') append('%');
-    if (key === '^') append('^');
+    if (key === '^' || key === '**') append('^');
     
-    // Control keys
+    // Function keys
     if (key === 'Enter' || key === '=') calculate();
     if (key === 'Escape') clearAll();
     if (key === 'Backspace') deleteLast();
     
-    // Constants (Ctrl+ key combinations)
-    if (e.ctrlKey && key === 'p') append('π');
-    if (e.ctrlKey && key === 'e') append('e');
-});
+    // Scientific functions (with modifier keys)
+    if (event.ctrlKey && key === 's') append('sin(');
+    if (event.ctrlKey && key === 'c') append('cos(');
+    if (event.ctrlKey && key === 't') append('tan(');
+    if (event.ctrlKey && key === 'l') append('log(');
+    if (event.ctrlKey && key === 'n') append('ln(');
+    if (event.ctrlKey && key === 'r') append('√(');
+    
+    // Constants
+    if (key === 'p' && event.ctrlKey) append('π');
+    if (key === 'e' && event.ctrlKey) append('e');
+}
 
 // Check if key is calculator key
 function isCalculatorKey(key) {
@@ -233,17 +233,43 @@ function isCalculatorKey(key) {
 // Add button press animation
 document.querySelectorAll('.btn').forEach(button => {
     button.addEventListener('mousedown', () => {
-        button.classList.add('pressed');
+        button.classList.add('press');
     });
     
     button.addEventListener('mouseup', () => {
-        button.classList.remove('pressed');
+        button.classList.remove('press');
     });
     
     button.addEventListener('mouseleave', () => {
-        button.classList.remove('pressed');
+        button.classList.remove('press');
     });
 });
+
+// Scientific mode toggle (optional feature)
+let isScientificMode = true;
+
+function toggleScientificMode() {
+    isScientificMode = !isScientificMode;
+    const scientificButtons = document.querySelectorAll('.scientific');
+    const modeIndicator = document.querySelector('.mode-indicator');
+    
+    scientificButtons.forEach(btn => {
+        btn.style.display = isScientificMode ? 'block' : 'none';
+    });
+    
+    modeIndicator.textContent = isScientificMode ? 'Scientific' : 'Standard';
+}
+
+// Initialize tooltips for scientific functions
+function initializeTooltips() {
+    const scientificButtons = document.querySelectorAll('.scientific');
+    scientificButtons.forEach(btn => {
+        btn.setAttribute('title', `Scientific function: ${btn.textContent}`);
+    });
+}
+
+// Call initialization
+initializeTooltips();
 
 // Export functions for HTML onclick attributes
 window.append = append;
