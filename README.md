@@ -62,8 +62,8 @@ calculator-app/
 Clone the repository and open the project in your browser.
 
 ```bash
-git clone https://github.com/yourusername/scientific-calculator.git
-cd scientific-calculator
+git clone https://github.com/kenenisabeyan/Calculator-App.git
+cd Calculator-App
 open index.html
 ```
 
@@ -90,7 +90,6 @@ Or run with **VS Code Live Server**.
 
 - Memory functions (M+, M-, MR)
 - Calculation history panel
-- Light/Dark theme toggle
 - Scientific mode toggle
 
 ---
@@ -100,7 +99,7 @@ Or run with **VS Code Live Server**.
 **Kenenisa Beyan**  
 Full Stack Developer  
 
-GitHub: https://github.com/yourusername
+GitHub: https://github.com/kenenisabeyan
 
 ---
 
