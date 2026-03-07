@@ -1,12 +1,14 @@
+/* CSS Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Base Styles */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -14,51 +16,46 @@ body {
   padding: 20px;
 }
 
+/* Calculator Container */
 .calculator {
   background: #1e1e1e;
   border-radius: 30px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   padding: 25px;
   width: 100%;
   max-width: 400px;
-  animation: slideIn 0.5s ease;
+  animation: fadeIn 0.4s ease;
 }
 
-@keyframes slideIn {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: scale(0.95);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
+/* Header */
 .calculator-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  color: #888;
-  font-size: 0.9rem;
-}
-
-.calculator-header h2 {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-.mode-indicator {
-  background: #2c2c2c;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-}
-
-.display-container {
   margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.calculator-header h1 {
+  color: #ff9800;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* Display Section */
+.display-container {
+  margin-bottom: 25px;
   position: relative;
 }
 
@@ -68,117 +65,100 @@ body {
   background: #2c2c2c;
   border: none;
   border-radius: 15px;
-  color: white;
-  font-size: 2.5rem;
+  color: #ffffff;
+  font-size: 2.2rem;
   text-align: right;
-  padding: 15px 20px;
-  outline: none;
+  padding: 20px;
   font-family: 'Courier New', monospace;
-  letter-spacing: 1px;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  outline: none;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.display-history {
+.expression-history {
   position: absolute;
-  top: 10px;
+  top: 8px;
   right: 20px;
   color: #888;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   min-height: 20px;
 }
 
+/* Button Grid */
 .button-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 }
 
+/* Button Base Styles */
 .btn {
   border: none;
-  border-radius: 15px;
+  border-radius: 12px;
   padding: 18px 0;
   font-size: 1.2rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: white;
+  color: #ffffff;
   background: #2c2c2c;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s;
-}
-
-.btn:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
+/* Button Hover Effects */
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
 }
 
 .btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Scientific Function Buttons */
 .btn.scientific {
   background: #363636;
   color: #ff9800;
   font-size: 1rem;
-}
-
-.btn.scientific:hover {
-  background: #404040;
-}
-
-.btn.number {
-  background: #2c2c2c;
-}
-
-.btn.number:hover {
-  background: #363636;
-}
-
-.btn.operator {
-  background: #363636;
-  color: #ff9800;
-  font-size: 1.3rem;
-}
-
-.btn.operator:hover {
-  background: #404040;
-}
-
-.btn.function {
-  background: #404040;
-  color: #ff9800;
   font-weight: 600;
 }
 
-.btn.function:hover {
-  background: #4a4a4a;
+/* Constant Buttons (π, e) */
+.btn.constant {
+  background: #363636;
+  color: #4db8ff;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
+/* Number Buttons */
+.btn.number {
+  background: #2c2c2c;
+  font-size: 1.3rem;
+}
+
+/* Operator Buttons */
+.btn.operator {
+  background: #363636;
+  color: #ff9800;
+  font-size: 1.4rem;
+}
+
+/* Function Buttons (AC, DEL) */
+.btn.function {
+  background: #404040;
+  color: #ff6b6b;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Equals Button */
 .btn.equals {
   grid-column: span 4;
   background: #ff9800;
-  color: white;
-  font-size: 1.5rem;
+  color: #ffffff;
+  font-size: 1.8rem;
   font-weight: 600;
   padding: 15px 0;
 }
@@ -186,10 +166,10 @@ body {
 .btn.equals:hover {
   background: #ffa726;
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+  box-shadow: 0 8px 15px rgba(255, 152, 0, 0.4);
 }
 
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 450px) {
   .calculator {
     padding: 15px;
@@ -197,7 +177,7 @@ body {
 
   .btn {
     padding: 15px 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .btn.scientific {
@@ -206,34 +186,29 @@ body {
 
   .display {
     height: 70px;
-    font-size: 2rem;
-    padding: 10px 15px;
+    font-size: 1.8rem;
+    padding: 15px;
   }
 }
 
 @media (max-width: 350px) {
   .btn {
     padding: 12px 0;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .btn.scientific {
     font-size: 0.8rem;
   }
 
-  .calculator-header h2 {
-    font-size: 1rem;
+  .calculator-header h1 {
+    font-size: 1.3rem;
   }
 }
 
-/* Button press animation */
-.btn.press {
-  transform: scale(0.95);
-}
-
-/* Error state for display */
+/* Error State */
 .display.error {
-  color: #ff4444;
+  color: #ff6b6b;
   animation: shake 0.3s ease;
 }
 
@@ -255,21 +230,22 @@ body {
   }
 }
 
-/* Custom scrollbar for webkit browsers */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Button Press Animation */
+.btn.pressed {
+  transform: scale(0.95);
 }
 
-::-webkit-scrollbar-track {
-  background: #1e1e1e;
+/* Disable text selection */
+.btn {
+  user-select: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+/* Focus styles for accessibility */
+.btn:focus {
+  outline: 2px solid #ff9800;
+  outline-offset: 2px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.btn:focus:not(:focus-visible) {
+  outline: none;
 }
