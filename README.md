@@ -99,7 +99,7 @@ Or run with **VS Code Live Server**.
 **Kenenisa Beyan**  
 Full Stack Developer  
 
-GitHub: https://github.com/kenenisabeyan
+GitHub: https://github.com/kenenisabeyan/Calculator-App
 
 ---
 
