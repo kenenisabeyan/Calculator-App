@@ -9,72 +9,62 @@
 </head>
 
 <body>
+
   <div class="calculator">
-    <div class="calculator-header">
-      <h2>Scientific Calculator</h2>
-      <span class="mode-indicator">Standard</span>
-    </div>
 
-    <div class="display-container">
-      <input type="text" id="display" class="display" readonly placeholder="0">
-      <div class="display-history" id="history"></div>
-    </div>
+    <h2>Scientific Calculator</h2>
 
-    <div class="button-grid" id="buttonGrid">
-      <!-- Row 1: Scientific functions -->
-      <button class="btn scientific" onclick="append('sin(')">sin</button>
-      <button class="btn scientific" onclick="append('cos(')">cos</button>
-      <button class="btn scientific" onclick="append('tan(')">tan</button>
-      <button class="btn scientific" onclick="append('π')">π</button>
+    <input type="text" id="display" readonly>
 
-      <!-- Row 2: Scientific functions -->
-      <button class="btn scientific" onclick="append('log(')">log</button>
-      <button class="btn scientific" onclick="append('ln(')">ln</button>
-      <button class="btn scientific" onclick="append('√(')">√</button>
-      <button class="btn scientific" onclick="append('e')">e</button>
+    <div class="buttons">
 
-      <!-- Row 3: Power and new functions -->
-      <button class="btn scientific" onclick="append('²')">x²</button>
-      <button class="btn scientific" onclick="append('^')">xʸ</button>
-      <button class="btn function" onclick="append('|')">|x|</button>
-      <button class="btn function" onclick="append('1/')">1/x</button>
+      <button onclick="sin()">sin</button>
+      <button onclick="cos()">cos</button>
+      <button onclick="tan()">tan</button>
+      <button onclick="insertPi()">π</button>
 
-      <!-- Row 4: Parentheses and controls -->
-      <button class="btn function" onclick="append('(')">(</button>
-      <button class="btn function" onclick="append(')')">)</button>
-      <button class="btn function" onclick="clearAll()">AC</button>
-      <button class="btn function" onclick="deleteLast()">DEL</button>
+      <button onclick="log()">log</button>
+      <button onclick="ln()">ln</button>
+      <button onclick="sqrt()">√</button>
+      <button onclick="insertE()">e</button>
 
-      <!-- Row 5: Numbers and operators -->
-      <button class="btn number" onclick="append('7')">7</button>
-      <button class="btn number" onclick="append('8')">8</button>
-      <button class="btn number" onclick="append('9')">9</button>
-      <button class="btn operator" onclick="append('/')">÷</button>
+      <button onclick="square()">x²</button>
+      <button onclick="power()">xʸ</button>
+      <button onclick="abs()">|x|</button>
+      <button onclick="reciprocal()">1/x</button>
 
-      <!-- Row 6 -->
-      <button class="btn number" onclick="append('4')">4</button>
-      <button class="btn number" onclick="append('5')">5</button>
-      <button class="btn number" onclick="append('6')">6</button>
-      <button class="btn operator" onclick="append('*')">×</button>
+      <button onclick="append('(')">(</button>
+      <button onclick="append(')')">)</button>
+      <button onclick="clearDisplay()">AC</button>
+      <button onclick="deleteLast()">DEL</button>
 
-      <!-- Row 7 -->
-      <button class="btn number" onclick="append('1')">1</button>
-      <button class="btn number" onclick="append('2')">2</button>
-      <button class="btn number" onclick="append('3')">3</button>
-      <button class="btn operator" onclick="append('-')">−</button>
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('/')">÷</button>
 
-      <!-- Row 8 -->
-      <button class="btn number" onclick="append('0')">0</button>
-      <button class="btn number" onclick="append('.')">.</button>
-      <button class="btn operator" onclick="append('%')">%</button>
-      <button class="btn operator" onclick="append('+')">+</button>
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('*')">×</button>
 
-      <!-- Row 9: Equals button spans 4 columns -->
-      <button class="btn equals" onclick="calculate()">=</button>
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('-')">−</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
+      <button onclick="append('%')">%</button>
+      <button onclick="append('+')">+</button>
+
+      <button class="equal" onclick="calculate()">=</button>
+
     </div>
   </div>
 
   <script src="script.js"></script>
+
 </body>
 
 </html>
