@@ -1,80 +1,80 @@
-🧮 Basic Calculator Web App
+# 🧮 Basic Calculator Web App
 
-A sleek, modern, and fully responsive Basic Calculator built using HTML, CSS, and Vanilla JavaScript.
+A sleek, modern, and fully responsive **Basic Calculator** built using **HTML, CSS, and Vanilla JavaScript**.  
 This project demonstrates clean UI design, smooth user interactions, and accurate arithmetic calculations without relying on any external libraries or frameworks.
 
-📸 Preview
+---
 
-<img width="943" height="977" alt="image" src="https://github.com/user-attachments/assets/f100dd07-358b-47d8-8879-5a956411d6b1" />
+## 📸 Preview
 
+<img width="943" height="977" alt="Calculator Preview" src="https://github.com/user-attachments/assets/f100dd07-358b-47d8-8879-5a956411d6b1" />
 
+---
 
-🚀 Features
-🔢 Core Functionality
+## 🚀 Features
 
-➕ Addition, ➖ Subtraction, ✖ Multiplication, ➗ Division
+### 🔢 Core Functionality
+- ➕ Addition, ➖ Subtraction, ✖ Multiplication, ➗ Division  
+- 📦 Parentheses support for complex expressions  
+- 💯 Percentage calculation (`% → /100`)  
+- 🔢 Decimal number support  
 
-📦 Parentheses support for complex expressions
+### 🎯 User Experience
+- ⚡ Real-time input display  
+- ⌨️ Full keyboard support  
+- 🧹 Clear (AC) and Delete (DEL) functions  
+- ❗ Error handling for invalid expressions  
+- 🎨 Smooth button animations  
+- 🌙 Modern dark-themed UI  
 
-💯 Percentage calculation (% → /100)
+### 📱 Responsive Design
+Works seamlessly across:
+- 💻 Desktop  
+- 📱 Mobile devices  
+- 📟 Tablets  
 
-🔢 Decimal number support
+---
 
-🎯 User Experience
+## 🛠️ Technologies Used
 
-⚡ Real-time input display
+- **HTML5** – Application structure  
+- **CSS3** – Layout, styling, animations (Grid & Flexbox)  
+- **Vanilla JavaScript** – Core logic and interactivity  
 
-⌨️ Full keyboard support
+> ⚡ No external libraries or frameworks were used.
 
-🧹 Clear (AC) and Delete (DEL) functions
+---
 
-❗ Error handling for invalid expressions
-
-🎨 Smooth button animations
-
-🌙 Modern dark-themed UI
-
-📱 Responsive Design
-
-Works perfectly on:
-
-💻 Desktop
-
-📱 Mobile devices
-
-📟 Tablets
-
-🛠️ Technologies Used
-
-HTML5 – Structure of the application
-
-CSS3 – Styling, layout, animations (Grid & Flexbox)
-
-Vanilla JavaScript – Core logic and interactivity
-
-⚡ No external libraries or frameworks were used.
-
-📂 Project Structure
-basic-calculator/
+## 📂 Project Structure
+Calculator-App/
 │
-├── index.html      # Main HTML structure
-├── style.css       # Styling and layout
-├── script.js       # Calculator logic
-└── README.md       # Project documentation
-⚙️ How to Use
-🌐 Run Online
+├── index.html # Main HTML structure
+├── style.css # Styling and layout
+├── script.js # Calculator logic
+└── README.md # Project documentation
 
-Simply open the index.html file in any modern web browser.
 
-💻 Local Installation
+
+---
+
+## ⚙️ How to Use
+
+### 🌐 Run Online
+Simply open the `index.html` file in any modern web browser.
+
+---
+
+### 💻 Local Installation
+
+```bash
 git clone https://github.com/kenenisabeyan/Calculator-App.git
 cd Calculator-App
 
 Then open:
 
 index.html
-
-Or use VS Code Live Server for a better development experience.
+Or run using VS Code Live Server for a better development experience.
+Or run using VS Code Live Server for a better development experience.
 
 ⌨️ Keyboard Shortcuts
 Key	Function
@@ -87,7 +87,7 @@ Backspace	Delete last input
 Escape	Clear all (AC)
 🧠 How Percentage Works
 
-The calculator automatically converts % into /100 before evaluation.
+The calculator automatically converts % into /100 before evaluating the expression.
 
 Examples:
 
@@ -118,5 +118,16 @@ Full Stack Developer
 
 If you found this project helpful:
 
-👉 Give it a star ⭐ on GitHub
-👉 Share it with others
+⭐ Star this repository
+
+🔗 Share it with others
+
+💡 Contribute ideas or improvements
+
+📄 License
+
+This project is licensed under the MIT License.
+
+🙌 Acknowledgment
+
+This project was built as part of continuous learning in web development, focusing on improving real-world problem-solving skills, clean code practices, and UI/UX design.
