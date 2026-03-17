@@ -5,7 +5,8 @@ This project demonstrates clean UI design, smooth user interactions, and accurat
 
 📸 Preview
 
-<img width="958" height="983" alt="image" src="https://github.com/user-attachments/assets/eaf045b2-7955-40ed-ab6c-9ad8780553ae" />
+<img width="943" height="977" alt="image" src="https://github.com/user-attachments/assets/f100dd07-358b-47d8-8879-5a956411d6b1" />
+
 
 
 🚀 Features
