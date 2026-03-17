@@ -2,90 +2,53 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Pro Scientific Calculator</title>
-
+  <title>Basic Calculator</title>
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
-
   <div class="calculator">
-
-    <div class="header">
-
-      <h2>Scientific Calculator</h2>
-
-      <select id="mode">
-        <option value="deg">DEG</option>
-        <option value="rad">RAD</option>
-      </select>
-
-    </div>
-
-    <input type="text" id="display" readonly>
-
-    <div id="history"></div>
+    <h2>🧮 Calculator</h2>
+    <input type="text" id="display" readonly placeholder="0">
 
     <div class="buttons">
-
-      <button onclick="sin()">sin</button>
-      <button onclick="cos()">cos</button>
-      <button onclick="tan()">tan</button>
-      <button onclick="insertPi()">π</button>
-
-      <button onclick="log()">log</button>
-      <button onclick="ln()">ln</button>
-      <button onclick="sqrt()">√</button>
-      <button onclick="insertE()">e</button>
-
-      <button onclick="square()">x²</button>
-      <button onclick="power()">xʸ</button>
-      <button onclick="absValue()">|x|</button>
-      <button onclick="reciprocal()">1/x</button>
-
+      <!-- row 1 : parentheses / clear / del -->
       <button onclick="append('(')">(</button>
       <button onclick="append(')')">)</button>
-      <button onclick="clearDisplay()">AC</button>
-      <button onclick="deleteLast()">DEL</button>
+      <button class="del-btn" onclick="clearDisplay()">AC</button>
+      <button class="del-btn" onclick="deleteLast()">DEL</button>
 
+      <!-- row 2 : 7 8 9 ÷ -->
       <button onclick="append('7')">7</button>
       <button onclick="append('8')">8</button>
       <button onclick="append('9')">9</button>
       <button onclick="append('/')">÷</button>
 
+      <!-- row 3 : 4 5 6 × -->
       <button onclick="append('4')">4</button>
       <button onclick="append('5')">5</button>
       <button onclick="append('6')">6</button>
       <button onclick="append('*')">×</button>
 
+      <!-- row 4 : 1 2 3 − -->
       <button onclick="append('1')">1</button>
       <button onclick="append('2')">2</button>
       <button onclick="append('3')">3</button>
       <button onclick="append('-')">−</button>
 
+      <!-- row 5 : 0 . % + -->
       <button onclick="append('0')">0</button>
       <button onclick="append('.')">.</button>
       <button onclick="append('%')">%</button>
       <button onclick="append('+')">+</button>
 
-      <button onclick="memoryClear()">MC</button>
-      <button onclick="memoryRecall()">MR</button>
-      <button onclick="memoryAdd()">M+</button>
-      <button onclick="memorySubtract()">M-</button>
-
+      <!-- row 6 : equal sign spans all -->
       <button class="equal" onclick="calculate()">=</button>
-
     </div>
-
   </div>
-
   <script src="script.js"></script>
-
 </body>
 
 </html>

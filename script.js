@@ -1,78 +1,178 @@
-let display = document.getElementById("display")
+(function() {
+  const display = document.getElementById('display');
 
-function append(value){
-display.value += value
-}
+  // ---------- basic display manipulation ----------
+  window.append = function(val) {
+    display.value += val;
+  };
 
-function clearDisplay(){
-display.value=""
-}
+  window.clearDisplay = function() {
+    display.value = '';
+  };
 
-function deleteLast(){
-display.value = display.value.slice(0,-1)
-}
+  window.deleteLast = function() {
+    display.value = display.value.slice(0, -1);
+  };
 
-function calculate(){
-try{
-display.value = eval(display.value)
-}catch{
-display.value="Error"
-}
-}
+  // ---------- safe evaluation (throws on error) ----------
+  function evaluateDisplay() {
+    let expr = display.value.trim();
+    if (expr === '') return 0;
+    // Use Function instead of direct eval to avoid scope leaks, but still eval math.
+    const result = Function('"use strict"; return (' + expr + ')')();
+    if (!isFinite(result) || isNaN(result)) {
+      throw new Error('Math error');
+    }
+    return result;
+  }
 
-function sin(){
-display.value = Math.sin(toRadians(getValue()))
-}
+  // ---------- get numeric value with error handling for functions ----------
+  function safeGetNumber() {
+    return evaluateDisplay();  // may throw
+  }
 
-function cos(){
-display.value = Math.cos(toRadians(getValue()))
-}
+  // ---------- degree/rad conversion ----------
+  function toRadians(x) {
+    const mode = document.getElementById('mode').value;
+    return mode === 'deg' ? x * Math.PI / 180 : x;
+  }
 
-function tan(){
-display.value = Math.tan(toRadians(getValue()))
-}
+  // ---------- trigonometric functions (each handles errors) ----------
+  window.sinFn = function() {
+    try {
+      const v = safeGetNumber();
+      display.value = Math.sin(toRadians(v)).toFixed(10).replace(/\.?0+$/, '');
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function log(){
-display.value = Math.log10(getValue())
-}
+  window.cosFn = function() {
+    try {
+      const v = safeGetNumber();
+      display.value = Math.cos(toRadians(v)).toFixed(10).replace(/\.?0+$/, '');
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function ln(){
-display.value = Math.log(getValue())
-}
+  window.tanFn = function() {
+    try {
+      const v = safeGetNumber();
+      const rad = toRadians(v);
+      display.value = Math.tan(rad).toFixed(10).replace(/\.?0+$/, '');
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function sqrt(){
-display.value = Math.sqrt(getValue())
-}
+  // ---------- log / ln ----------
+  window.logFn = function() {
+    try {
+      const v = safeGetNumber();
+      if (v <= 0) throw new Error('log of non-positive');
+      display.value = Math.log10(v);
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function square(){
-let v=getValue()
-display.value = v*v
-}
+  window.lnFn = function() {
+    try {
+      const v = safeGetNumber();
+      if (v <= 0) throw new Error('ln of non-positive');
+      display.value = Math.log(v);
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function power(){
-display.value += "**"
-}
+  window.sqrtFn = function() {
+    try {
+      const v = safeGetNumber();
+      if (v < 0) throw new Error('sqrt negative');
+      display.value = Math.sqrt(v);
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function abs(){
-display.value = Math.abs(getValue())
-}
+  // ---------- power / square / abs / reciprocal ----------
+  window.squareFn = function() {
+    try {
+      const v = safeGetNumber();
+      display.value = v * v;
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function reciprocal(){
-display.value = 1/getValue()
-}
+  window.powerFn = function() {
+    // just append '**' for exponentiation
+    display.value += '**';
+  };
 
-function insertPi(){
-display.value += Math.PI
-}
+  window.absFn = function() {
+    try {
+      const v = safeGetNumber();
+      display.value = Math.abs(v);
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function insertE(){
-display.value += Math.E
-}
+  window.reciprocalFn = function() {
+    try {
+      const v = safeGetNumber();
+      if (v === 0) throw new Error('division by zero');
+      display.value = 1 / v;
+    } catch {
+      display.value = 'Error';
+    }
+  };
 
-function getValue(){
-return parseFloat(display.value)
-}
+  // ---------- constants ----------
+  window.insertPi = function() {
+    display.value += Math.PI;
+  };
 
-function toRadians(deg){
-return deg*Math.PI/180
-}
+  window.insertE = function() {
+    display.value += Math.E;
+  };
+
+  // ---------- calculate (equals) ----------
+  window.calculate = function() {
+    try {
+      const result = evaluateDisplay();
+      display.value = result;
+    } catch {
+      display.value = 'Error';
+    }
+  };
+
+  // ---------- keyboard support ----------
+  document.addEventListener('keydown', function(e) {
+    const key = e.key;
+    if (key >= '0' && key <= '9') append(key);
+    else if (key === '.') append('.');
+    else if (key === '+' || key === '-' || key === '*' || key === '/') {
+      if (key === '*') append('*');
+      else if (key === '/') append('/');
+      else append(key);
+    } else if (key === '(' || key === ')') append(key);
+    else if (key === '%') append('%');
+    else if (key === 'Enter' || key === '=') {
+      e.preventDefault();
+      calculate();
+    } else if (key === 'Backspace') {
+      e.preventDefault();
+      deleteLast();
+    } else if (key === 'Escape') {
+      clearDisplay();
+    } else if (key === 'p' || key === 'P') {
+      insertPi();
+    } else if (key === 'e' || key === 'E') {
+      insertE();
+    }
+  });
+})();
