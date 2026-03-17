@@ -92,42 +92,70 @@ The calculator automatically converts % into /100 before evaluating the expressi
 Examples:
 
 50% → 50/100 → 0.5
+Or run using **VS Code Live Server** for a better development experience.
 
-20 + 10% → 20 + 10/100 → 20.1
+---
+
+## ⌨️ Keyboard Shortcuts
+
+| Key            | Function            |
+|----------------|-------------------|
+| 0–9            | Numbers            |
+| + - * /        | Operators          |
+| ( )            | Parentheses        |
+| %              | Percentage         |
+| Enter or =     | Calculate result   |
+| Backspace      | Delete last input  |
+| Escape         | Clear all (AC)     |
+
+---
+
+## 🧠 How Percentage Works
+
+The calculator automatically converts `%` into `/100` before evaluating the expression.
+
+### Examples:
+- `50%` → `50/100` → **0.5**  
+- `20 + 10%` → `20 + 10/100` → **20.1**
 
 This behavior matches real-world calculator logic.
 
-🔮 Future Improvements
+---
 
-📜 Calculation history panel
+## 🔮 Future Improvements
 
-🧠 Memory functions (M+, M-, MR, MC)
+- 📜 Calculation history panel  
+- 🧠 Memory functions (M+, M-, MR, MC)  
+- 🔬 Scientific calculator mode (sin, cos, log, etc.)  
+- 🎨 Theme customization  
 
-🔬 Scientific calculator mode (sin, cos, log, etc.)
+---
 
-🎨 Theme customization
+## 👨‍💻 Author
 
-👨‍💻 Author
+**Kenenisa Beyan**  
+Full Stack Developer  
 
-Kenenisa Beyan
-Full Stack Developer
+- 🌐 GitHub: https://github.com/kenenisabeyan  
 
-🌐 GitHub: https://github.com/kenenisabeyan
+---
 
-⭐ Support
+## ⭐ Support
 
 If you found this project helpful:
 
-⭐ Star this repository
+- ⭐ Star this repository  
+- 🔗 Share it with others  
+- 💡 Contribute ideas or improvements  
 
-🔗 Share it with others
+---
 
-💡 Contribute ideas or improvements
+## 📄 License
 
-📄 License
+This project is licensed under the **MIT License**.
 
-This project is licensed under the MIT License.
+---
 
-🙌 Acknowledgment
+## 🙌 Acknowledgment
 
-This project was built as part of continuous learning in web development, focusing on improving real-world problem-solving skills, clean code practices, and UI/UX design.
+This project was built as part of continuous learning in **web development**, focusing on improving real-world problem-solving skills, clean code practices, and UI/UX design.
