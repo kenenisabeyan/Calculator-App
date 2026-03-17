@@ -5,7 +5,8 @@ This project demonstrates clean UI design, smooth user interactions, and accurat
 
 📸 Preview
 
-(Replace screenshot.png with your actual image file)
+<img width="958" height="983" alt="image" src="https://github.com/user-attachments/assets/eaf045b2-7955-40ed-ab6c-9ad8780553ae" />
+
 
 🚀 Features
 🔢 Core Functionality
