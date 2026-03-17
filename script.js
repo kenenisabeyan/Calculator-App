@@ -14,10 +14,15 @@
     display.value = display.value.slice(0, -1);
   };
 
-  // ---------- safe evaluation (throws on error) ----------
+  // ---------- safe evaluation with percentage support ----------
   function evaluateDisplay() {
     let expr = display.value.trim();
     if (expr === '') return 0;
+
+    // Replace % with /100 to handle percentage correctly
+    // This converts e.g., "50%" to "50/100" and "20+10%" to "20+10/100"
+    expr = expr.replace(/%/g, '/100');
+
     // Use Function to evaluate the mathematical expression
     const result = Function('"use strict"; return (' + expr + ')')();
     if (!isFinite(result) || isNaN(result)) {
