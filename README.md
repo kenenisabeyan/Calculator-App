@@ -1,106 +1,120 @@
-# Scientific Calculator Web Application
+🧮 Basic Calculator Web App
 
-A modern **Scientific Calculator** built using **HTML5, CSS3, and Vanilla JavaScript**.  
-This project demonstrates clean code structure, responsive UI design, and advanced mathematical functionality without using any external frameworks.
+A sleek, modern, and fully responsive Basic Calculator built using HTML, CSS, and Vanilla JavaScript.
+This project demonstrates clean UI design, smooth user interactions, and accurate arithmetic calculations without relying on any external libraries or frameworks.
 
----
+📸 Preview
 
-## Features
+(Replace screenshot.png with your actual image file)
 
-### Basic Operations
-- Addition (+)
-- Subtraction (−)
-- Multiplication (×)
-- Division (÷)
-- Percentage (%)
+🚀 Features
+🔢 Core Functionality
 
-### Scientific Functions
-- Trigonometric functions: `sin`, `cos`, `tan`
-- Logarithmic functions: `log`, `ln`
-- Power operations: `x²`, `xʸ`
-- Square root `√`
-- Mathematical constants: `π`, `e`
-- Absolute value `|x|`
-- Reciprocal `1/x`
-- Parentheses support for complex expressions
+➕ Addition, ➖ Subtraction, ✖ Multiplication, ➗ Division
 
-### User Experience
-- Real-time expression display
-- Keyboard input support
-- Error handling
-- Button press animations
-- Responsive design for mobile and desktop
+📦 Parentheses support for complex expressions
 
----
+💯 Percentage calculation (% → /100)
 
-## Technologies Used
+🔢 Decimal number support
 
-- **HTML5** – Application structure
-- **CSS3** – Layout, styling, and animations
-- **Vanilla JavaScript** – Calculator logic
-- **JavaScript Math API** – Scientific calculations
+🎯 User Experience
 
-No external libraries or frameworks were used.
+⚡ Real-time input display
 
----
+⌨️ Full keyboard support
 
-## Project Structure
+🧹 Clear (AC) and Delete (DEL) functions
 
-```
-calculator-app/
+❗ Error handling for invalid expressions
+
+🎨 Smooth button animations
+
+🌙 Modern dark-themed UI
+
+📱 Responsive Design
+
+Works perfectly on:
+
+💻 Desktop
+
+📱 Mobile devices
+
+📟 Tablets
+
+🛠️ Technologies Used
+
+HTML5 – Structure of the application
+
+CSS3 – Styling, layout, animations (Grid & Flexbox)
+
+Vanilla JavaScript – Core logic and interactivity
+
+⚡ No external libraries or frameworks were used.
+
+📂 Project Structure
+basic-calculator/
 │
-├── index.html
-├── style.css
-├── script.js
-└── README.md
-```
+├── index.html      # Main HTML structure
+├── style.css       # Styling and layout
+├── script.js       # Calculator logic
+└── README.md       # Project documentation
+⚙️ How to Use
+🌐 Run Online
 
----
+Simply open the index.html file in any modern web browser.
 
-## Installation
-
-Clone the repository and open the project in your browser.
-
-```bash
+💻 Local Installation
 git clone https://github.com/kenenisabeyan/Calculator-App.git
 cd Calculator-App
-open index.html
-```
 
-Or run with **VS Code Live Server**.
+Then open:
 
----
+index.html
 
-## Keyboard Shortcuts
+Or use VS Code Live Server for a better development experience.
 
-| Key | Function |
-|----|----|
-| 0–9 | Numbers |
-| . | Decimal |
-| + − × ÷ | Operators |
-| Enter | Calculate |
-| Backspace | Delete |
-| Escape | Clear |
-| Ctrl + P | π |
-| Ctrl + E | e |
+⌨️ Keyboard Shortcuts
+Key	Function
+0–9	Numbers
++ - * /	Operators
+( )	Parentheses
+%	Percentage
+Enter or =	Calculate result
+Backspace	Delete last input
+Escape	Clear all (AC)
+🧠 How Percentage Works
 
----
+The calculator automatically converts % into /100 before evaluation.
 
-## Future Improvements
+Examples:
 
-- Memory functions (M+, M-, MR)
-- Calculation history panel
-- Scientific mode toggle
+50% → 50/100 → 0.5
 
----
+20 + 10% → 20 + 10/100 → 20.1
 
-## Author
+This behavior matches real-world calculator logic.
 
-**Kenenisa Beyan**  
-Full Stack Developer  
+🔮 Future Improvements
 
-GitHub: https://github.com/kenenisabeyan
+📜 Calculation history panel
 
----
+🧠 Memory functions (M+, M-, MR, MC)
 
-⭐ If you found this project useful, consider starring the repository.
+🔬 Scientific calculator mode (sin, cos, log, etc.)
+
+🎨 Theme customization
+
+👨‍💻 Author
+
+Kenenisa Beyan
+Full Stack Developer
+
+🌐 GitHub: https://github.com/kenenisabeyan
+
+⭐ Support
+
+If you found this project helpful:
+
+👉 Give it a star ⭐ on GitHub
+👉 Share it with others
